@@ -63,7 +63,7 @@ class Servers(BaseHTTPRequestHandler):
                 'access_token').send_text_msg(
                 "监控报警："+post_dict['content'], False)
         except:
-            logging.exception("主机监控报警：" + post_dict['content'])
+            logging.exception("监控报警：" + post_dict['content'])
 
 print 'server is running....'
 server = HTTPServer(addr,Servers)
