@@ -57,10 +57,13 @@ class Servers(BaseHTTPRequestHandler):
         post_str = urllib.unquote(args)
         post_dict = dict([x.split('=',1) for x in post_str.split('&')])
         #包含content和tos两部分
-        DingTalkRobot(
-            'https://oapi.dingtalk.com/robot/send',
-            'access_token').send_text_msg(
-            "监控报警："+post_dict['content'], False)
+        try:
+            DingTalkRobot(
+                'https://oapi.dingtalk.com/robot/send',
+                'access_token').send_text_msg(
+                "监控报警："+post_dict['content'], False)
+        except:
+            logging.exception("主机监控报警：" + post_dict['content'])
 
 print 'server is running....'
 server = HTTPServer(addr,Servers)
